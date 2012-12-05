@@ -105,42 +105,6 @@ class Form_builder {
 	}
 	
 	/**
-	 * builds and prints out a text and an option section.
-	 * the values parameter defines the element with its index.
-	 */
-	public function text_option($id, $name, $values = array(), $default = array(), $class = array(), $placeholder = array('', 'TT.MM.JJJJ'), $prepend = '', $append = '') {
-		$this->base_control($id, $name);
-		
-		if (is_array($id)) {
-			
-			for ($i = 0; $i < count($id); $i++) {
-				$df = isset($default[$i]) ? $default[$i] : '';
-				$cl = isset($class[$i]) ? $class[$i] : '';
-				$ph = isset($placeholder[$i]) ? $placeholder[$i] : '';
-				$readonly = ($this->_editable) ? '' : 'readonly';
-				$disabled = ($this->_editable) ? '' : 'disabled';
-				$value = (is_array($values[$i])) ? $values[$i] : false;
-				
-				if ($value) {
-					echo '<select '. $disabled .' name="'. $id[$i] .'" id="'. $id[$i] .'" class="'. $cl .'">';
-					echo '	<option value="" '. (($default == '') ? 'SELECTED' : '') .'></option>';
-					foreach ($values as $value) {
-						echo '<option value="'. $value->id .'" '. set_select($id[$i], $value->id, $default == $value->id) .'>'. $value->name .'</option>';
-					}
-					echo '</select>';
-				} else {
-					$this->addon_begin($prepend, $append, 'input-small');
-					echo '<input type="text" '. $readonly .' placeholder="'. $ph .'" class="'. $cl . '" name="'. $id[$i] .'" id="'. $id[$i] .'" value="'. set_value($id[$i], $df) .'" /> ';
-					$this->addon_end($prepend, $append);
-				}
-		
-			}
-		}
-		
-		$this->base_end();
-	}
-	
-	/**
 	 * builds and prints out a radio input section.
 	 * @param id string
 	 * @param name string
