@@ -53,7 +53,7 @@ additional parameters:
 * **prepend**: prepended input (before text)
 * **append**: appended input (after text)
 
-![ScreenShot](https://github.com/zwacky/codeigniter_form_builder/raw/master/readme-data/text.png)
+![ScreenShot](https://github.com/zwacky/codeigniter_form_builder/raw/master/readme-data/password.png)
 
     $this->form_builder->password('password', 'Passwort', '12345');
 
