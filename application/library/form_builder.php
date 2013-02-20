@@ -93,7 +93,7 @@ class Form_builder {
 					$this->_build_date($id, $df, $cl, $pm);
 					break;
 				case Form_builder::$TYPES->BUTTON:
-					$this->single_button($pm, $id, $cl, '');
+					$this->single_button($df, $id, $cl, '', 'button');
 					break;
 				case Form_builder::$TYPES->PASSWORD:
 					$this->_build_text($id, $df, $cl, $pm, $pp, $ap, true);
@@ -203,10 +203,16 @@ class Form_builder {
 		$this->base_end();
 	}
 	
-	public function single_button($name, $id = '', $class = '', $icon = '') {
-		$disabled = ($this->_editable) ? '' : 'disabled';
-		$icon = ($icon != '') ? "<i class='{$icon}'></i> " : '';
-		echo "<button type='submit' id='{$id}' name='{$id}' {$disabled} class='btn {$class} {$disabled}' value='{$name}'>{$icon}{$name}</button>";
+	/**
+	 * builds and prints a single button without indentation.
+	 * @param id string
+	 * @param name string
+	 * @param class string
+	 * @param icon string
+	 * @param type string [button|submit|reset]
+	 */
+	public function single_button($name, $id = '', $class = '', $icon = '', $type = 'submit') {
+		$this->_build_button($id, $name, $class, $icon, $type);
 	}
 	
 	/**
@@ -215,11 +221,13 @@ class Form_builder {
 	 * @param name string
 	 * @param class string
 	 */
-	public function button($id, $name, $class = '') {
+	public function button($id, $name, $class = '', $icon = '', $type = 'button') {
 		$this->base_control('', '');
-		echo "<button class='btn {$class}' id='{$id}' name='{$id}'>{$name}</button>";
+		$this->_build_button($id, $name, $class, $icon, $type);
 		$this->base_end();
 	}
+	
+	
 	
 	/**
 	 * builds and prints a hidden input field.
@@ -228,6 +236,17 @@ class Form_builder {
 	 */
 	public function hidden($id, $default = '') {
 		echo '<input type="hidden" id="'. $id .'" name="'. $id .'" value="'. $default . '" />';
+	}
+	
+	/**
+	 * builds and prints a single label on the left side (correctly indented) with variable content on the right side.
+	 * @param name string
+	 * @param content string
+	 */
+	public function label($name, $content) {
+		$this->base_control('', $name);
+		echo "<div style='margin-top:5px;'>{$content}</div>";
+		$this->base_end();
 	}
 	
 	/**
@@ -315,6 +334,12 @@ class Form_builder {
 		$readonly = ($this->_editable) ? '' : 'readonly';
 		$datepicker = ($this->_editable) ? 'data-datepicker="datepicker"' : '';
 		echo '<input type="text" '. $readonly .' class="'. $class .'" '. $datepicker .' placeholder="'. $placeholder .'" id="'. $id .'" name="'. $id .'" value="'. set_value($id, $default) .'">';
+	}
+	
+	private function _build_button($id, $name, $class, $icon, $type = 'submit') {
+		$disabled = ($this->_editable) ? '' : 'disabled';
+		$icon = ($icon != '') ? "<i class='{$icon}'></i> " : '';
+		echo "<button type='{$type}' id='{$id}' name='{$id}' {$disabled} class='btn {$class} {$disabled}'>{$icon}{$name}</button>";
 	}
 	
 	
