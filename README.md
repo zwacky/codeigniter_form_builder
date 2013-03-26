@@ -84,7 +84,7 @@ Option
       (object) array('id' => 2, 'name' => 'Deutschland'),
       (object) array('id' => 3, 'name' => 'Österreich'),
     );
-    $this->form_builder->radio('country', 'Land', $countries, 1);
+    $this->form_builder->option('country', 'Land', $countries, 1);
 
 Date
 ----
@@ -222,11 +222,11 @@ Types
 -----
 
     Form_builder::$TYPES = (object) array(
-    	'TEXT' => 1,
-			'OPTION' => 2,
-			'CHECKBOX' => 3,
-			'DATE' => 4,
-			'RADIO' => 5,
+      'TEXT' => 1,
+      'OPTION' => 2,
+      'CHECKBOX' => 3,
+      'DATE' => 4,
+      'RADIO' => 5,
       'BUTTON' => 6,
-			'PASSSWORD' => 7,
-		);
+      'PASSSWORD' => 7,
+    );
