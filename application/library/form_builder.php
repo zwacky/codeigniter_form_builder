@@ -325,7 +325,7 @@ class Form_builder {
 		foreach ($boxes as $box) {
 			$selected = (in_array($box->id, $defaults)) ? true : false;
 			echo '<label class="checkbox '. $class .'">';
-			echo '	<input type="checkbox" '. $disabled .' id="'. $id . '_' . $box->id .'" '. ($disabled ? 'disabled' : '') .' name="'. $id .'[]" value="'. $box->id .'" rel-value="'. $box->id .'" '. set_checkbox($id . '[]', $box->id, $selected) .'/>' . $box->name;
+			echo '	<input type="checkbox" '. $disabled .' id="'. ((count($boxes) > 1) ? "{$id}_" : '') . $box->id .'" '. ($disabled ? 'disabled' : '') .' name="'. $id . ((count($boxes) > 1) ? '[]' : '') .'" value="'. $box->id .'" '. set_checkbox($id . '[]', $box->id, $selected) .'/>' . $box->name;
 			echo '</label> ';
 		}
 	}
