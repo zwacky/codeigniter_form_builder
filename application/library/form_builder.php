@@ -93,7 +93,7 @@ class Form_builder {
 					$this->_build_date($id, $df, $cl, $pm);
 					break;
 				case Form_builder::$TYPES->BUTTON:
-					$this->single_button($df, $id, $cl, '', 'button');
+					$this->single_button($df, $id, $cl, '', ($pp) ? $pp : 'button');
 					break;
 				case Form_builder::$TYPES->PASSWORD:
 					$this->_build_text($id, $df, $cl, $pm, $pp, $ap, true);
